@@ -132,7 +132,7 @@ public class userCheckout implements Initializable {
                     while(rs1.next()){
                         if(rs1.getString(1).equals("M")){
                             labelDiskon.setText("Rp 10000");
-                            PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(DetailOrder.Total) - 10000 FROM DetailOrder) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1");
+                            PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(DetailOrder.Total) - 10000 FROM DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1;");
                             int stats = pst.executeUpdate();
                             if(stats!=-1){
                                 Statement st2 = con.createStatement();
@@ -145,7 +145,7 @@ public class userCheckout implements Initializable {
 
                         }else{
                             labelDiskon.setText("Rp 0");
-                            PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(DetailOrder.Total) FROM DetailOrder) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1");
+                            PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(DetailOrder.Total) FROM DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1;");
                             int stats = pst.executeUpdate();
                             if(stats!=-1){
                                 Statement st2 = con.createStatement();
