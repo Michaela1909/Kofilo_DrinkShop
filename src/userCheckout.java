@@ -64,16 +64,25 @@ public class userCheckout implements Initializable {
     @FXML
     void bayarBtn(ActionEvent event) throws IOException {
         try {
-            updateMetodePembayaran();
+            if (metodePembayaranCb.getSelectionModel().isEmpty()) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Silahkan Pilih Metode Pembayaran!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            } else {
+                updateMetodePembayaran();
+                
+                Stage stage = (Stage) bayar.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("userInvoice.fxml"));
+                stage.setTitle("Kofilo");
+                stage.setScene(new Scene(root));
+            }
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
-        Stage stage = (Stage) bayar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("userInvoice.fxml"));
-        stage.setTitle("Kofilo");
-        stage.setScene(new Scene(root));
     }
 
     @FXML

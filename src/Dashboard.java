@@ -540,7 +540,7 @@ public class Dashboard implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
+        cbBulan.getItems().add("All");
         cbBulan.getItems().add("Januari 2022");
         cbBulan.getItems().add("Februari 2022");
         cbBulan.getItems().add("Maret 2022");
@@ -553,10 +553,13 @@ public class Dashboard implements Initializable {
         cbBulan.getItems().add("Oktober 2022");
         cbBulan.getItems().add("November 2022");
         cbBulan.getItems().add("Desember 2022");
-        cbBulan.getItems().add("All");
 
         getTotalPelanggan();
+        labelTotalPendapatan.setText("Rp 0");
+        labelTotalPembelian.setText("Rp 0");
+        getTopSales();
         getStokSegeraHabis();
+
     }
 
     private void getTotalPelanggan(){
@@ -568,7 +571,20 @@ public class Dashboard implements Initializable {
                 labelTotalPelanggan.setText(rs.getString(1));
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+    private void getTopSales() {
+        try {
+            Statement st = con.createStatement();
+            String sql = "SELECT Minuman.NamaMinuman FROM DetailOrder, Minuman, Transaksi WHERE DetailOrder.MinumanID = Minuman.MinumanID AND Transaksi.TransaksiID = DetailOrder.TransaksiID GROUP BY Minuman.NamaMinuman ORDER BY sum(DetailOrder.Quantity) DESC LIMIT 5";
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                topSales.getItems().add(rs.getString("NamaMinuman"));
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }

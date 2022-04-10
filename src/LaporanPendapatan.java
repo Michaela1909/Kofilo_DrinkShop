@@ -339,8 +339,27 @@ public class LaporanPendapatan {
         tcMetodeTransaksi.setCellValueFactory(new PropertyValueFactory<>("MetodeTransaksi"));
         tcTotal.setCellValueFactory(new PropertyValueFactory<>("Total"));
 
+        try {
+            //tvLaporanPenjualan.getItems().clear();
+            linkedList.clear();
+            Statement st = con.createStatement();
+            String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID ";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                pendapatan tvLaporanPenjualan = new pendapatan(rs.getString("Username"), (rs.getInt("UserID")), (rs.getString("TanggalTransaksi")), (rs.getString("MetodeTransaksi")), (rs.getInt("Total")));
+                linkedList.add(tvLaporanPenjualan);
+            }
+            tvLaporanPenjualan.getItems().clear();
+            tvLaporanPenjualan.getItems().addAll(linkedList);
+                
 
+        } catch (Exception e) {
+            e.getStackTrace();
+            e.getCause();
+        }
     }
+
+    
 
     @FXML
     void back(MouseEvent event) throws IOException {

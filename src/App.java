@@ -10,7 +10,7 @@ public class App extends Application {
 
     public void start(Stage stage) throws IOException {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/LaporanPendapatan.fxml"));
+            loader.setLocation(getClass().getResource("/Dashboard.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

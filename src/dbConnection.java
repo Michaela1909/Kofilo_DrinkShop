@@ -6,7 +6,7 @@ public class dbConnection{
     public Connection getConnection(){
         String databaseName = "Kofilo";
         String databaseUser = "root";
-        String databasePassword = "Nml_19092002";
+        String databasePassword = "1234";
         String url = "jbdc:mysql://localhost/" + databaseName;
 
         try{
