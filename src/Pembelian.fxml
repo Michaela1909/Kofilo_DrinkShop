@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #f3f2ef #f3f2ef;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PembelianAdmin">
+   <children>
+      <Label layoutX="136.0" layoutY="109.0" text="PEMBELIAN">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="37.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnLogOut" layoutX="1093.0" layoutY="654.0" mnemonicParsing="false" onAction="#btnLogOut" style="-fx-background-color: trasnparent;" text="LOG OUT" textFill="#a98853">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Button>
+      <Label layoutX="1063.0" layoutY="53.0" text="Welcome, Admin" textFill="#a98853">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="317.0" layoutY="209.0" text="NAMA PRODUK" textFill="#a98853" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="224.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="838.0" layoutY="213.0" text="Quantity" textFill="#a98853" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="224.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="650.0" layoutY="378.0" text="Total" textFill="#a98853" AnchorPane.leftAnchor="596.0" AnchorPane.topAnchor="385.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfQuantity" layoutX="727.0" layoutY="257.0" onAction="#quantity" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 30; -fx-border-color: #a98853; -fx-border-width: 2; -fx-border-radius: 30;" AnchorPane.leftAnchor="720.0" AnchorPane.topAnchor="261.0">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <TextField fx:id="tfTotalPembelian" layoutX="479.0" layoutY="418.0" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f3f2ef; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-color: #a98853; -fx-border-radius: 25;" AnchorPane.leftAnchor="440.0" AnchorPane.topAnchor="425.0" />
+      <Button fx:id="btnKirimPembelian" layoutX="534.0" layoutY="557.0" mnemonicParsing="false" onAction="#btnKirimPembelian" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #a98853 #a98853 #a98853 #a98853; -fx-background-radius: 25;" text="KIRIM" textFill="WHITE" AnchorPane.leftAnchor="515.0" AnchorPane.topAnchor="550.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="back" fitHeight="25.0" fitWidth="115.0" layoutX="124.0" layoutY="56.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
+         <image>
+            <Image url="@picture/back.png" />
+         </image>
+      </ImageView>
+      <ComboBox fx:id="NamaProduk" layoutX="338.0" layoutY="281.0" onAction="#NamaProduk" prefHeight="50.0" prefWidth="400.0" promptText="-- select -- " style="-fx-background-color: #F3F2EF; -fx-border-color: #a98853; -fx-border-width: 2; -fx-background-radius: 30; -fx-border-radius: 30;" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="261.0" />
+   </children>
+</AnchorPane>
