@@ -52,7 +52,7 @@ CREATE TABLE Pembelian (
     NamaBahanID INT NOT NULL,
     Quantity INT NOT NULL,
     TotalHargaBeli INT NOT NULL,
-    TanggalTransaki DATE NOT NULL
+    TanggalTransaksi DATE NOT NULL
 ); 
 
 CREATE TABLE NamaBahan (
