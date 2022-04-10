@@ -1,10 +1,3 @@
-# insert user
-INSERT INTO user VALUES (UserID, 'nathaniamich', 'nathania', 'nathania@mail.com', 08123102913, '123', '123', 'N');
-INSERT INTO user VALUES (UserID, 'michaela', 'mich', 'micha@gmail.com', '09242312314', '123', '123', 'N');
-INSERT INTO user VALUES (UserID, 'yoana', 'yoana', 'yoana@gmail.com', '0812131415', '123', '123', 'N');
-INSERT INTO user VALUES (UserID, 'clarisa', 'clarisa', 'clarisa@gmail.com', '08121212', '123', '123', 'N');
-INSERT INTO user VALUES (UserID, 'ela', 'ela', 'ela@gmail.com', '08121212', '123', '123', 'A');
-
 # insert category
 INSERT INTO category VALUES (CategoryID, 'Hot');
 INSERT INTO category VALUES (CategoryID, 'Iced');
