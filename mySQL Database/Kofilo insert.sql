@@ -1,3 +1,31 @@
+# insert user
+INSERT INTO user VALUES (UserID, 'nathaniamich', 'nathania', 'nathania@mail.com', 08123102913, '123', '123', 'N');
+INSERT INTO user VALUES (UserID, 'michaela', 'mich', 'micha@gmail.com', '09242312314', '123', '123', 'N');
+INSERT INTO user VALUES (UserID, 'yoana', 'yoana', 'yoana@gmail.com', '0812131415', '123', '123', 'N');
+INSERT INTO user VALUES (UserID, 'clarisa', 'clarisa', 'clarisa@gmail.com', '08121212', '123', '123', 'N');
+INSERT INTO user VALUES (UserID, 'ela', 'ela', 'ela@gmail.com', '08121212', '123', '123', 'A');
+
+# insert category
+INSERT INTO category VALUES (CategoryID, 'Hot');
+INSERT INTO category VALUES (CategoryID, 'Iced');
+INSERT INTO category VALUES (CategoryID, 'Signature');
+
+# insert minuman jenis "hot"
+INSERT INTO minuman VALUES (MinumanID, 'Hot Americano', '1', 35000);
+INSERT INTO minuman VALUES (MinumanID, 'Hot Cappucino', '1', 45000);
+INSERT INTO minuman VALUES (MinumanID, 'Hot Espresso', '1', 35000);
+INSERT INTO minuman VALUES (MinumanID, 'Hot Latte', '1', 40000);
+# insert minuman jenis "iced"
+INSERT INTO minuman VALUES (MinumanID, 'Iced Americano', '2', 30000);
+INSERT INTO minuman VALUES (MinumanID, 'Iced Cappucino', '2', 30000);
+INSERT INTO minuman VALUES (MinumanID, 'Iced Mocaccino', '2', 35000);
+INSERT INTO minuman VALUES (MinumanID, 'Iced Vanilla Latte', '2', 45000);
+# insert minuman jenis "signature"
+INSERT INTO minuman VALUES (MinumanID, 'Caramel Machiato', '3', 45000);
+INSERT INTO minuman VALUES (MinumanID, 'Java Chip Frape', '3', 45000);
+INSERT INTO minuman VALUES (MinumanID, 'Matcha Frappe', '3', 55000);
+INSERT INTO minuman VALUES (MinumanID, 'Salted Caramel Latte', '3', 55000);
+
 #Insert NamaBahan
 INSERT INTO NamaBahan VALUES (NamaBahanID, 'Kopi Bubuk', 0, 50);
 INSERT INTO NamaBahan VALUES (NamaBahanID, 'Susu Full Cream', 0,30);
@@ -72,7 +100,7 @@ INSERT INTO Bahan VALUES (BahanID, 10, 10, 20);
 
 -- Matcha Frappe -- 
 INSERT INTO Bahan VALUES (BahanID, 14, 11, 10); 
-INSERT INTO Bahan VALUES (BahanID, 7, 11, 100); 
+INSERT INTO Bahan VALUES (BahanID, 7, 1, 100); 
 INSERT INTO Bahan VALUES (BahanID, 13, 11, 200); 
 INSERT INTO Bahan VALUES (BahanID, 15, 11, 20); 
 INSERT INTO Bahan VALUES (BahanID, 8, 11, 180); 
@@ -83,7 +111,5 @@ INSERT INTO Bahan VALUES (BahanID, 15, 12, 10);
 INSERT INTO Bahan VALUES (BahanID, 13, 12, 55); 
 INSERT INTO Bahan VALUES (BahanID, 9, 12, 1); 
 
--- untuk ngurangin jumlah bahan 
-UPDATE NamaBahan JOIN Bahan ON Bahan.NamaBahanID = NamaBahan.NamaBahanID SET NamaBahan.Quantity = NamaBahan.Quantity - Bahan.Quantity WHERE Bahan.MinumanID = 12 AND NamaBahan.Quantity > 0 ; 
 
-SELECT NamaBahan.Quantity FROM NamaBahan JOIN Bahan ON NamaBahan.NamaBahanID = Bahan.NamaBahanID AND Bahan.MinumanID = (SELECT MinumanID FROM Minuman WHERE NamaMinuman = "Iced Americano");
+
