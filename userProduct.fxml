@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userProduct">
+   <left>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #f3f2ef;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="174.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@picture/kofilo-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <AnchorPane prefHeight="413.0" prefWidth="300.0" style="-fx-background-color: #a98853; -fx-background-radius: 20;" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutY="-1.0" prefHeight="474.0" prefWidth="260.0">
+                     <children>
+                        <Label fx:id="NameLabel" text="Americano" textFill="#f3f2ef">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="ImageSrc" fitHeight="168.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="19.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/HotAmericano.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="CategoryLabel" text="Hot" textFill="#f3f2ef">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="260.0">
+                           <children>
+                              <Label text="Price" textFill="#f3f2ef">
+                                 <HBox.margin>
+                                    <Insets left="35.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="41.0" prefWidth="50.0" />
+                              <Label fx:id="PriceLabel" text="Rp 35000" textFill="#f3f2ef">
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="260.0">
+                           <children>
+                              <Label text="Qty" textFill="#f3f2ef">
+                                 <HBox.margin>
+                                    <Insets left="35.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Arial Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Pane prefHeight="39.0" prefWidth="52.0" />
+                              <ComboBox fx:id="quantity" onAction="#selectQuantity" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;" />
+                           </children>
+                        </HBox>
+                        <Button fx:id="btnAddItem" mnemonicParsing="false" onAction="#AddItem" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;" text="Add Item" textFill="#a98853">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnCheckout" mnemonicParsing="false" onAction="#Checkout" prefHeight="27.0" prefWidth="130.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;" text="Checkout" textFill="#a98853">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#Logout" prefHeight="43.0" prefWidth="136.0" style="-fx-background-color: rgba (0,0,0,0);" text="Log Out" textFill="#a98853">
+               <VBox.margin>
+                  <Insets bottom="20.0" right="150.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Menu" textFill="#a98853">
+               <font>
+                  <Font name="Arial Bold" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="980.0">
+               <children>
+                  <Label text="HOT">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="160.0" prefWidth="980.0">
+               <children>
+                  <VBox fx:id="HAmericanoBox" alignment="TOP_CENTER" onMouseClicked="#HAmericanoBoxHAmericanoBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;" stylesheets="@style.css">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@pic/HotAmericano.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Label text="Americano">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="200.0" prefWidth="49.0" />
+                  <VBox fx:id="HCappucinoBox" alignment="TOP_CENTER" onMouseClicked="#HCappucinoBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/HotCappucino.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Cappucino">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="160.0" prefWidth="49.0" />
+                  <VBox fx:id="HEspressonBox" alignment="TOP_CENTER" onMouseClicked="#HEspressoBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/HotEspresso.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Espresso">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="160.0" prefWidth="49.0" />
+                  <VBox fx:id="HLatteBox" alignment="TOP_CENTER" onMouseClicked="#HLatteBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/HotLatte.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Latte">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Label text="COLD">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="160.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="CAmericanoBox" alignment="TOP_CENTER" onMouseClicked="#CAmericanoBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/IcedAmericano.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Americano">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="160.0" prefWidth="49.0" />
+                  <VBox fx:id="CCappucinoBox" alignment="TOP_CENTER" onMouseClicked="#CCappucinoBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/IcedCappucino.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Cappucino">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="160.0" prefWidth="49.0" />
+                  <VBox fx:id="CMoccacinoBox" alignment="TOP_CENTER" onMouseClicked="#CMoccacinoBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-border-radius: 15; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/IcedMoccacino.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Moccacino">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="160.0" prefWidth="49.0" />
+                  <VBox fx:id="CVanillaLatteBox" alignment="TOP_CENTER" onMouseClicked="#CVanillaLatteBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/IcedVanillaLatte.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Vanilla Latte">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Label text="SIGNATURE">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="160.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="SCaramelMachiatoBox" alignment="TOP_CENTER" onMouseClicked="#SCaramelMachiatoBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/SignatureCaramelMachiato.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Caramel Machiato">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="160.0" prefWidth="49.0" />
+                  <VBox fx:id="SJavaChipFrappeBox" alignment="TOP_CENTER" onMouseClicked="#SJavaChipFrappeBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/SignatureJavaChipFrappe.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Java Chip Frappe">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="160.0" prefWidth="49.0" />
+                  <VBox fx:id="SMatchaFrappeBox" alignment="TOP_CENTER" onMouseClicked="#SMatchaFrappeBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/SignatureMatchaFrappe.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Matcha Frappe">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="160.0" prefWidth="49.0" />
+                  <VBox fx:id="SSaltedCaramelLatteBox" alignment="TOP_CENTER" onMouseClicked="#SSaltedCaramelLatteBox" prefHeight="150.0" prefWidth="180.0" style="-fx-background-color: #f3f2ef; -fx-background-radius: 15;">
+                     <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@pic/SignatureSaltedCaramelLatte.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Salted Caramel Latte">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
