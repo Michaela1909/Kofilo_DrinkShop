@@ -1,0 +1,76 @@
+CREATE DATABASE Kofilo;
+USE Kofilo;
+
+CREATE TABLE User (
+    UserID INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    Username VARCHAR(30) NOT NULL UNIQUE,
+    FullName VARCHAR(50) NOT NULL,
+    Email VARCHAR(50) NOT NULL,
+    Phone VARCHAR(15) NOT NULL,
+    Password VARCHAR(30) NOT NULL,
+    RePassword VARCHAR(30) NOT NULL,
+    UserStatus CHAR(1) NOT NULL
+);
+
+CREATE TABLE Transaksi (
+    TransaksiID INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    TanggalTransaksi DATE NOT NULL,
+    UserID INT NOT NULL,
+    Total INT NOT NULL,
+    MetodeTransaksi VARCHAR(15)
+);
+
+CREATE TABLE DetailOrder (
+    DetailOrderID INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    TransaksiID INT NOT NULL,
+    MinumanID INT NOT NULL,
+    Quantity SMALLINT NOT NULL,
+    Total INT NOT NULL
+);
+
+CREATE TABLE Minuman (
+    MinumanID INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    NamaMinuman VARCHAR(30) NOT NULL UNIQUE,
+    CategoryID INT NOT NULL,
+    Harga INT NOT NULL
+);
+
+CREATE TABLE Category (
+    CategoryID INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    Jenis VARCHAR(30) NOT NULL UNIQUE
+);
+
+CREATE TABLE Bahan (
+    BahanID INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    NamaBahanID INT NOT NULL,
+    MinumanID INT NOT NULL,
+    Quantity INT NOT NULL
+); 
+
+CREATE TABLE Pembelian (
+    PembelianID INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    NamaBahanID INT NOT NULL,
+    Quantity INT NOT NULL,
+    TotalHargaBeli INT NOT NULL,
+    TanggalTransaki DATE NOT NULL
+); 
+
+CREATE TABLE NamaBahan (
+    NamaBahanID INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    NamaBahan VARCHAR(30) NOT NULL,
+    Quantity INT NOT NULL,
+    HargaBeli INT NOT NULL
+);
+
+ALTER TABLE Transaksi ADD CONSTRAINT FK_Transaksi_UserID FOREIGN KEY (UserID) REFERENCES User(UserID);
+
+ALTER TABLE DetailOrder ADD CONSTRAINT FK_Detail_Order_TransaksiID FOREIGN KEY (TransaksiID) REFERENCES Transaksi(TransaksiID),
+						ADD CONSTRAINT FK_Detail_Order_MinumanID FOREIGN KEY (MinumanID) REFERENCES Minuman(MinumanID); 
+
+ALTER TABLE Minuman ADD CONSTRAINT FK_Minuman_CategoryID FOREIGN KEY(CategoryID) REFERENCES Category(CategoryID);
+
+ALTER TABLE Bahan ADD CONSTRAINT FK_Bahan_MinumanID FOREIGN KEY(MinumanID) REFERENCES Minuman(MinumanID),
+				  ADD CONSTRAINT FK_Bahan_NamaBahanID FOREIGN KEY(namaBahanID) REFERENCES NamaBahan(namaBahanID);
+
+ALTER TABLE Pembelian ADD CONSTRAINT FK_Pembelian_NamaBahanID FOREIGN KEY(NamaBahanID) REFERENCES NamaBahan(NamaBahanID); 
+
