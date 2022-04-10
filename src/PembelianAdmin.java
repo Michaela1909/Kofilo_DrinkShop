@@ -112,6 +112,9 @@ public class PembelianAdmin implements Initializable{
             Harga = 20;
             NamaBahanID=15;
         }
+        int quantity = Integer.parseInt(tfQuantity.getText());
+        int total = quantity * Harga;
+        tfTotalPembelian.setText(Integer.toString(total));
 
     }
 
