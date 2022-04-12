@@ -606,10 +606,23 @@ public class userProduct implements Initializable{
 
     @FXML
     void Checkout(ActionEvent event) throws IOException {
-        Stage stage = (Stage) btnLogout.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("AfterUserProduct.fxml"));
-        stage.setTitle("Kofilo");
-        stage.setScene(new Scene(root));
+        try {
+            if (quantity.getSelectionModel().isEmpty()) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Tentukan Produk dan Quantity!");
+                alert.setContentText(null);
+                alert.showAndWait();
+            } else {
+                Stage stage = (Stage) btnLogout.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("AfterUserProduct.fxml"));
+                stage.setTitle("Kofilo");
+                stage.setScene(new Scene(root));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 
 
