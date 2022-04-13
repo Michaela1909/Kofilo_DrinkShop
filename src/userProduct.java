@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -109,7 +108,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -155,7 +153,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -200,7 +197,8 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
+            e.getCause();
         }
     }
 
@@ -235,7 +233,8 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
+            e.getCause();
         }
     }
  
@@ -258,7 +257,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -303,7 +301,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -327,7 +324,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -361,7 +357,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -408,7 +403,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         }catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }   
@@ -419,7 +413,6 @@ public class userProduct implements Initializable{
         String Name = "Java Chip Frape";
         try {
             Statement st = con.createStatement();
-            //String sql1 = "SELECT NamaBahan.Quantity FROM NamaBahan WHERE NamaBahanID = ";
             ResultSet rs = st.executeQuery("SELECT NamaBahan.Quantity FROM NamaBahan WHERE NamaBahanID = 13 AND NamaBahan.Quantity>60");
             if(rs.next()){
                 ResultSet rs1 = st.executeQuery("SELECT NamaBahan.Quantity FROM NamaBahan WHERE NamaBahanID = 1 AND NamaBahan.Quantity>10");
@@ -449,7 +442,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -496,7 +488,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         }catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }   
@@ -508,7 +499,6 @@ public class userProduct implements Initializable{
         String Name = "Salted Caramel Latte";
         try {
             Statement st = con.createStatement();
-            //String sql1 = "SELECT NamaBahan.Quantity FROM NamaBahan WHERE NamaBahanID = ";
             ResultSet rs = st.executeQuery("SELECT NamaBahan.Quantity FROM NamaBahan WHERE NamaBahanID = 13 AND NamaBahan.Quantity>55");
             if(rs.next()){
                 ResultSet rs1 = st.executeQuery("SELECT NamaBahan.Quantity FROM NamaBahan WHERE NamaBahanID = 1 AND NamaBahan.Quantity>10");
@@ -538,7 +528,6 @@ public class userProduct implements Initializable{
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -570,7 +559,6 @@ public class userProduct implements Initializable{
                     alert.showAndWait();
                 }else{
                     pst = con.prepareStatement("UPDATE DetailOrder INNER JOIN Minuman on DetailOrder.MinumanID = Minuman.MinumanID SET DetailOrder.Total = DetailOrder.Quantity * Minuman.Harga");
-                    //String sqlUpdate = "UPDATE detailorder INNER JOIN minuman on detailorder.MinumanID = minuman.MinumanID SET detailorder.Total = detailorder.Quantity * minuman.Harga";
                     int statusUpdate = pst.executeUpdate();
                     if(statusUpdate!=-1){
                         pst = con.prepareStatement("UPDATE NamaBahan, Bahan, DetailOrder SET NamaBahan.Quantity = NamaBahan.Quantity - (Bahan.Quantity * DetailOrder.Quantity) WHERE DetailOrder.MinumanID = Bahan.MinumanID AND bahan.NamaBahanID = NamaBahan.NamaBahanID AND DetailOrder.DetailOrderID = (SELECT DetailOrderID FROM DetailOrder ORDER BY DetailOrderID DESC LIMIT 1)");
@@ -593,7 +581,6 @@ public class userProduct implements Initializable{
                 }
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             e.getCause();
         }
@@ -607,15 +594,50 @@ public class userProduct implements Initializable{
     @FXML
     void Checkout(ActionEvent event) throws IOException {
         try {
-            if (quantity.getSelectionModel().isEmpty()) {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Error");
-                alert.setHeaderText("Tentukan Produk dan Quantity!");
-                alert.setContentText(null);
-                alert.showAndWait();
-            } else {
-                Stage stage = (Stage) btnLogout.getScene().getWindow();
+            Statement st = con.createStatement();
+            String sql = "SELECT DetailOrderID FROM DetailOrder WHERE TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)";
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next()){
+                Stage stage = (Stage) btnCheckout.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getResource("AfterUserProduct.fxml"));
+                stage.setTitle("Kofilo");
+                stage.setScene(new Scene(root));
+            }else
+                checkoutMsg();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+    }
+
+
+    @FXML
+    void Logout(ActionEvent event) throws IOException {
+        try {
+            Statement st = con.createStatement();
+            String sql = "SELECT DetailOrder.DetailOrderID FROM DetailOrder WHERE TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)";
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next()){
+                String sql1= "SELECT Transaksi.Total FROM Transaksi, DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID ORDER BY Transaksi.TransaksiID DESC LIMIT 1";
+                rs = st.executeQuery(sql1);
+                if(rs.next()){
+                    if(rs.getInt(1)== 0){
+                        Logoutwarning();
+                    }else{
+                        LogoutMsg();
+                        Stage stage = (Stage) btnLogout.getScene().getWindow();
+                        Parent root = FXMLLoader.load(getClass().getResource("firstPage.fxml"));
+                        stage.setTitle("Kofilo");
+                        stage.setScene(new Scene(root));
+                    }
+                }
+            }else{
+                PreparedStatement pst = con.prepareStatement("DELETE FROM Transaksi WHERE Total = 0");
+                pst.execute();
+                LogoutMsg();
+                Stage stage = (Stage) btnLogout.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("firstPage.fxml"));
                 stage.setTitle("Kofilo");
                 stage.setScene(new Scene(root));
             }
@@ -625,18 +647,8 @@ public class userProduct implements Initializable{
         }
     }
 
-
-    @FXML
-    void Logout(ActionEvent event) throws IOException {
-        Stage stage = (Stage) btnLogout.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("firstPage.fxml"));
-        stage.setTitle("Kofilo");
-        stage.setScene(new Scene(root));
-    }
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        // TODO Auto-generated method stub
         ObservableList<String> list = FXCollections.observableArrayList("1","2","3","4","5","6","7","8","9","10");
         quantity.setItems(list);
     }
@@ -644,8 +656,28 @@ public class userProduct implements Initializable{
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Error");
         alert.setHeaderText("Persediaan menu habis");
-        //alert.setContentText("Silahkan coba lagi!");
+        alert.setContentText("Silahkan coba lagi!");
+        alert.showAndWait();
+    }
+    public void Logoutwarning(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("Silahkan menyelesaikan pembayaran terlebih dahulu!");
+        alert.setContentText("Silahkan coba lagi!");
+        alert.showAndWait();
+    }
+    public void LogoutMsg(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Berhasil");
+        alert.setHeaderText("Anda berhasil melakukan log out.");
+        alert.setContentText("Terima Kasih dan Sampai Jumpa Kembali!");
+        alert.showAndWait();
+    }
+    public void checkoutMsg(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("Gagal");
+        alert.setContentText("Silahkan memilih menu item yang diinginkan terlebih dahulu!");
         alert.showAndWait();
     }
 }
-
