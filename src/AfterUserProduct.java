@@ -61,6 +61,8 @@ public class AfterUserProduct implements Initializable{
 
     Connection con = connection.kofiloConnection();
     LinkedList<order> ll = new LinkedList<>();
+    ObservableList<Integer> list = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10);
+
 
     @FXML
     void Back(ActionEvent event) throws IOException {
@@ -72,10 +74,22 @@ public class AfterUserProduct implements Initializable{
 
     @FXML
     void checkout(ActionEvent event) throws IOException {
-        Stage stage = (Stage) btnChekout.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("userCheckout.fxml"));
-        stage.setTitle("Kofilo");
-        stage.setScene(new Scene(root));
+        try {
+            Statement st = con.createStatement();
+            String sql = "SELECT DetailOrderID FROM DetailOrder WHERE TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)";
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next()){
+                Stage stage = (Stage) btnChekout.getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("userCheckout.fxml"));
+                stage.setTitle("Kofilo");
+                stage.setScene(new Scene(root));
+            }else
+                checkoutMsg();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
     }
 
     @FXML
@@ -181,12 +195,12 @@ public class AfterUserProduct implements Initializable{
         }
         labelNamaItem.setText(tcItem.getCellData(index).toString());
         cbQuantity.setValue(tcQuantity.getCellData(index));
+        cbQuantity.setItems(list);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
-        ObservableList<Integer> list = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10);
         cbQuantity.setItems(list);
         
         tcItem.setCellValueFactory(new PropertyValueFactory<>("NamaMinuman"));
@@ -208,5 +222,11 @@ public class AfterUserProduct implements Initializable{
             e.getCause();
         }
     }
-
+    public void checkoutMsg(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("Gagal");
+        alert.setContentText("Silahkan memilih menu item yang diinginkan terlebih dahulu!");
+        alert.showAndWait();
+    }
 }
