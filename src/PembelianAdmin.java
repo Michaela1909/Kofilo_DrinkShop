@@ -112,9 +112,6 @@ public class PembelianAdmin implements Initializable{
             Harga = 20;
             NamaBahanID=15;
         }
-        int quantity = Integer.parseInt(tfQuantity.getText());
-        int total = quantity * Harga;
-        tfTotalPembelian.setText(Integer.toString(total));
 
     }
 
@@ -148,14 +145,12 @@ public class PembelianAdmin implements Initializable{
                 alert.showAndWait();
                 
             }else{
-                pst = con.prepareStatement("UPDATE NamaBahan, Pembelian SET NamaBahan.Quantity = NamaBahan.Quantity + Pembelian.Quantity WHERE Pembelian.NamaBahanID = NamaBahan.NamaBahanID AND Pembelian.NamaBahanID = " + NamaBahanID);
-                //String sqlUpdate = "UPDATE detailorder INNER JOIN minuman on detailorder.MinumanID = minuman.MinumanID SET detailorder.Total = detailorder.Quantity * minuman.Harga";
+                pst = con.prepareStatement("UPDATE NamaBahan,Pembelian SET NamaBahan.Quantity = NamaBahan.Quantity + (SELECT Quantity FROM Pembelian ORDER BY PembelianID DESC LIMIT 1) WHERE Pembelian.NamaBahanID = NamaBahan.NamaBahanID AND Pembelian.NamaBahanID = " + NamaBahanID+"");
                 int statusUpdate = pst.executeUpdate();
                 if(statusUpdate!=-1){
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Berhasil");
                     alert.setHeaderText("Anda Berhasil membeli " + NamaProduk.getSelectionModel().getSelectedItem());
-                    //alert.setContentText("Silahkan coba lagi!");
                     alert.showAndWait();
 
                     tfQuantity.setText(null);
@@ -171,7 +166,6 @@ public class PembelianAdmin implements Initializable{
 
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.getCause();
             e.printStackTrace();
         }
@@ -194,7 +188,6 @@ public class PembelianAdmin implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
         ObservableList<String> list = FXCollections.observableArrayList("Kopi Bubuk", "Susu Full Cream", "Cokelat Bubuk", "Sirup Vanilla", "Saus Karamel", "Saus Cokelat", "Whipped Cream", "Susu Kental Manis", "Garam", "Chocolate Chips", "Gula Merah", "Gula Putih", "Susu Fresh Milk", "Bubuk Matcha", "Creamer Bubuk");
         NamaProduk.setItems(list);
     }
