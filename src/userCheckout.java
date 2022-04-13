@@ -63,20 +63,23 @@ public class userCheckout implements Initializable {
 
     @FXML
     void bayarBtn(ActionEvent event) throws IOException {
+        
         try {
-            if (metodePembayaranCb.getSelectionModel().isEmpty()) {
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Error");
-                alert.setHeaderText("Silahkan Pilih Metode Pembayaran!");
-                alert.setContentText(null);
-                alert.showAndWait();
-            } else {
-                updateMetodePembayaran();
-                
-                Stage stage = (Stage) bayar.getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("userInvoice.fxml"));
-                stage.setTitle("Kofilo");
-                stage.setScene(new Scene(root));
+            Statement st = con.createStatement();
+            String sql = "SELECT DetailOrder.DetailOrderID FROM DetailOrder WHERE TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)";
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next()){
+                if(metodePembayaranCb.getSelectionModel().getSelectedItem() == null){
+                    MetodePembayaranMsg();
+                }else{
+                    updateMetodePembayaran();
+                    Stage stage = (Stage) bayar.getScene().getWindow();
+                    Parent root = FXMLLoader.load(getClass().getResource("userInvoice.fxml"));
+                    stage.setTitle("Kofilo");
+                    stage.setScene(new Scene(root));
+                }
+            }else{
+                errorMsg();
             }
         } catch (Exception e) {
             //TODO: handle exception
@@ -96,6 +99,10 @@ public class userCheckout implements Initializable {
         metodePembayaranCb.getItems().add("Cash");
         metodePembayaranCb.getItems().add("Transfer Bank");
         metodePembayaranCb.getItems().add("OVO");
+
+        labelTotal.setText("Rp 0");
+        labelDiskon.setText("");
+        labelTotalBelanja.setText("Rp 0");
 
         tc_item.setCellValueFactory(new PropertyValueFactory<>("NamaMinuman"));
         tc_qty.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
@@ -132,7 +139,7 @@ public class userCheckout implements Initializable {
                     while(rs1.next()){
                         if(rs1.getString(1).equals("M")){
                             labelDiskon.setText("Rp 10000");
-                            PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(DetailOrder.Total) - 10000 FROM DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1;");
+                            PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(Total)-10000 FROM DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1;");
                             int stats = pst.executeUpdate();
                             if(stats!=-1){
                                 Statement st2 = con.createStatement();
@@ -145,7 +152,7 @@ public class userCheckout implements Initializable {
 
                         }else{
                             labelDiskon.setText("Rp 0");
-                            PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(DetailOrder.Total) FROM DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1;");
+                            PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(Total) FROM DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1;");
                             int stats = pst.executeUpdate();
                             if(stats!=-1){
                                 Statement st2 = con.createStatement();
@@ -189,7 +196,20 @@ public class userCheckout implements Initializable {
             e.printStackTrace();
             e.getCause();
         }
-        
+    }
+    public void errorMsg(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("Silahkan coba lagi!");
+        alert.setContentText("Silahkan pilih item yang anda ingin beli terlebih dahulu!");
+        alert.showAndWait();
+    }
+    public void MetodePembayaranMsg(){
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("Silahkan coba lagi!");
+        alert.setContentText("Silahkan pilih metode pembayaran yang ingin digunakan terlebih dahulu!");
+        alert.showAndWait();
     }
 
 }
