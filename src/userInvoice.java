@@ -17,10 +17,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.order;
 
 public class userInvoice implements Initializable{
+
+    @FXML
+    private ImageView back;
 
     @FXML
     private Label labelDiskon;
@@ -45,6 +50,14 @@ public class userInvoice implements Initializable{
 
     @FXML
     private TableColumn<order, String> tc_qty;
+
+    @FXML
+    void back(MouseEvent event) throws IOException {
+        Stage stage = (Stage) menuBtn.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("userCheckout.fxml"));
+        stage.setTitle("Kofilo");
+        stage.setScene(new Scene(root));
+    }
 
     @FXML
     void menuBtn(ActionEvent event) throws IOException {
@@ -128,3 +141,4 @@ public class userInvoice implements Initializable{
         }
     }
 }
+
