@@ -26,7 +26,7 @@
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="317.0" layoutY="209.0" text="NAMA PRODUK" textFill="#a98853" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="224.0">
+      <Label layoutX="317.0" layoutY="209.0" text="Nama Produk" textFill="#a98853" AnchorPane.leftAnchor="159.0" AnchorPane.topAnchor="224.0">
          <font>
             <Font name="Arial Rounded MT Bold" size="25.0" />
          </font>
