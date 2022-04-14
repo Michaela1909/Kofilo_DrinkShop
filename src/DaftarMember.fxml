@@ -15,25 +15,25 @@
             <Font name="Arial Rounded MT Bold" size="37.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNM" layoutX="234.0" layoutY="266.0" onAction="#tfNM" prefHeight="73.0" prefWidth="401.0" style="-fx-background-color: #a98853 #a98853; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 25;" />
-      <TextField fx:id="tfUsername" layoutX="737.0" layoutY="267.0" onAction="#tfUsername" prefHeight="73.0" prefWidth="401.0" style="-fx-background-color: #a98853 #a98853; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-color: #a98853; -fx-border-radius: 25;" />
-      <TextField fx:id="tfNoTelp" layoutX="237.0" layoutY="408.0" onAction="#tfNoTelp" prefHeight="73.0" prefWidth="401.0" style="-fx-background-color: #a98853 #a98853; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-color: #a98853; -fx-border-radius: 25;" />
+      <TextField fx:id="tfNM" layoutX="234.0" layoutY="266.0" onAction="#tfNM" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f3f2ef; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #a98853;" />
+      <TextField fx:id="tfUsername" layoutX="737.0" layoutY="267.0" onAction="#tfUsername" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f3f2ef; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-color: #a98853; -fx-border-radius: 25;" />
+      <TextField fx:id="tfNoTelp" layoutX="237.0" layoutY="408.0" onAction="#tfNoTelp" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f3f2ef; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-color: #a98853; -fx-border-radius: 25;" />
       <Button fx:id="btnKirim" layoutX="537.0" layoutY="567.0" mnemonicParsing="false" onAction="#btnKirim" prefHeight="68.0" prefWidth="291.0" style="-fx-background-color: #a98853 #a98853 #a98853 #a98853; -fx-background-radius: 25;" text="KIRIM" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="25.0" />
          </font>
       </Button>
-      <Label layoutX="245.0" layoutY="217.0" text="NAMA MEMBER" textFill="#a98853">
+      <Label layoutX="243.0" layoutY="223.0" text="Nama Member" textFill="#a98853">
          <font>
             <Font name="Arial Rounded MT Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="749.0" layoutY="216.0" text="USERNAME" textFill="#a98853">
+      <Label layoutX="750.0" layoutY="223.0" text="Username" textFill="#a98853">
          <font>
             <Font name="Arial Rounded MT Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="253.0" layoutY="371.0" text="NO TELP" textFill="#a98853">
+      <Label layoutX="253.0" layoutY="367.0" text="No Telp" textFill="#a98853">
          <font>
             <Font name="Arial Rounded MT Bold" size="25.0" />
          </font>
@@ -48,8 +48,8 @@
             <Font name="Arial Rounded MT Bold" size="26.0" />
          </font>
       </Button>
-      <TextField fx:id="tfPW" layoutX="737.0" layoutY="408.0" onAction="#tfPW" prefHeight="73.0" prefWidth="401.0" style="-fx-background-color: #a98853 #a98853; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-color: #a98853; -fx-border-radius: 25;" />
-      <Label layoutX="752.0" layoutY="367.0" text="PASSWORD" textFill="#a98853">
+      <TextField fx:id="tfPW" layoutX="737.0" layoutY="408.0" onAction="#tfPW" prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: #f3f2ef; -fx-border-width: 2; -fx-background-radius: 25; -fx-border-color: #a98853; -fx-border-radius: 25;" />
+      <Label layoutX="752.0" layoutY="367.0" text="Password" textFill="#a98853">
          <font>
             <Font name="Arial Rounded MT Bold" size="25.0" />
          </font>
