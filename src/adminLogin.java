@@ -49,7 +49,6 @@ public class adminLogin {
     @FXML
     void login(MouseEvent event) throws IOException {
         try {
-            
             if (username.getText().isEmpty() || password.getText().isEmpty()) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Error");
@@ -73,6 +72,8 @@ public class adminLogin {
                         alert.setHeaderText("Anda bukan admin");
                         alert.setContentText("Silahkan coba lagi!");
                         alert.showAndWait();
+                        username.setText(null);
+                        password.setText(null);
                     }
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
@@ -95,5 +96,4 @@ public class adminLogin {
         stage.setTitle("Kofilo");
         stage.setScene(new Scene(root));
     }
-
 }

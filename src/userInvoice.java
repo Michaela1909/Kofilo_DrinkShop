@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +50,9 @@ public class userInvoice implements Initializable{
     @FXML
     private TableColumn<order, String> tc_qty;
 
+    Connection con = connection.kofiloConnection();
+    LinkedList<order> ll = new LinkedList<>();
+
     @FXML
     void back(MouseEvent event) throws IOException {
         Stage stage = (Stage) menuBtn.getScene().getWindow();
@@ -67,12 +69,8 @@ public class userInvoice implements Initializable{
         stage.setScene(new Scene(root));
     }
 
-    Connection con = connection.kofiloConnection();
-    LinkedList<order> ll = new LinkedList<>();
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
         tc_item.setCellValueFactory(new PropertyValueFactory<>("NamaMinuman"));
         tc_qty.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
         tc_harga.setCellValueFactory(new PropertyValueFactory<>("Total"));
@@ -89,56 +87,55 @@ public class userInvoice implements Initializable{
             getTotal();
             getDiskon();
             getTotalBelanja();
-            
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
     }
-    public void getTotal(){
+
+    public void getTotal() {
         try {
             Statement st = con.createStatement();
             String sql = "SELECT SUM(DetailOrder.Total) FROM DetailOrder WHERE TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)";
             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 labelTotal.setText("Rp " + rs.getString(1));
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
     }
-    public void getDiskon(){
+
+    public void getDiskon() {
         try {
             Statement st1 = con.createStatement();
             String sql1 = "SELECT User.UserStatus FROM User, Transaksi WHERE Transaksi.UserID = User.UserID ORDER BY TransaksiID DESC LIMIT 1";
             ResultSet rs1 = st1.executeQuery(sql1);
-            while(rs1.next()){
-                if(rs1.getString(1).equals("M")){
+            while (rs1.next()) {
+                if (rs1.getString(1).equals("M")) {
                     labelDiskon.setText("Rp 10000");
-                }else{
+                } else {
                     labelDiskon.setText("Rp 0");
                 }
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
     }
-    public void getTotalBelanja(){
+
+    public void getTotalBelanja() {
         try {
             Statement st = con.createStatement();
             String sql = "SELECT Total FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1";
             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 labelTotalBelanja.setText("Rp " + rs.getString(1));
             }
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
+            e.getCause();
         }
     }
 }
-

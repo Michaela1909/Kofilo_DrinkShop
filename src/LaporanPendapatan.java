@@ -3,7 +3,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,12 +52,10 @@ public class LaporanPendapatan {
 
     @FXML
     void Bulan(ActionEvent event) {
-        //tvLaporanPenjualan.getItems().clear();
         String bulan = cbBulan.getSelectionModel().getSelectedItem();
-        if(bulan == "Januari 2022"){
+        if (bulan == "Januari 2022") {
             try {
                 linkedList.clear();
-                //tvLaporanPenjualan.getItems().clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='01' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
                 ResultSet rs = st.executeQuery(sql);
@@ -68,16 +65,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "Februari 2022"){
+        if (bulan == "Februari 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='02' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -88,16 +82,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "Maret 2022"){
+        if (bulan == "Maret 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='03' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -108,16 +99,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "April 2022"){
+        if (bulan == "April 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='04' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -128,16 +116,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "Mei 2022"){
+        if (bulan == "Mei 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='05' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -148,16 +133,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "Juni 2022"){
+        if (bulan == "Juni 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='06' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -168,16 +150,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "Juli 2022"){
+        if (bulan == "Juli 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='07' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -188,16 +167,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "Agustus 2022"){
+        if (bulan == "Agustus 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='08' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -208,16 +184,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "September 2022"){
+        if (bulan == "September 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='09' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -228,16 +201,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "Oktober 2022"){
+        if (bulan == "Oktober 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='10' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -248,16 +218,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "November 2022"){
+        if (bulan == "November 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='11' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -268,16 +235,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "Desember 2022"){
+        if (bulan == "Desember 2022") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID AND MONTH (Transaksi.TanggalTransaksi)='12' AND YEAR(Transaksi.TanggalTransaksi)='2022'";
@@ -288,16 +252,13 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
             }
         }
-        if(bulan == "All"){
+        if (bulan == "All") {
             try {
-                //tvLaporanPenjualan.getItems().clear();
                 linkedList.clear();
                 Statement st = con.createStatement();
                 String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID ";
@@ -308,8 +269,6 @@ public class LaporanPendapatan {
                 }
                 tvLaporanPenjualan.getItems().clear();
                 tvLaporanPenjualan.getItems().addAll(linkedList);
-                    
-    
             } catch (Exception e) {
                 e.getStackTrace();
                 e.getCause();
@@ -319,6 +278,7 @@ public class LaporanPendapatan {
     
     @FXML
     public void initialize() {
+        cbBulan.getItems().add("All");
         cbBulan.getItems().add("Januari 2022");
         cbBulan.getItems().add("Februari 2022");
         cbBulan.getItems().add("Maret 2022");
@@ -331,7 +291,6 @@ public class LaporanPendapatan {
         cbBulan.getItems().add("Oktober 2022");
         cbBulan.getItems().add("November 2022");
         cbBulan.getItems().add("Desember 2022");
-        cbBulan.getItems().add("All");
 
         tcUsername.setCellValueFactory(new PropertyValueFactory<>("Username"));
         tcUserID.setCellValueFactory(new PropertyValueFactory<>("UserID"));
@@ -340,7 +299,6 @@ public class LaporanPendapatan {
         tcTotal.setCellValueFactory(new PropertyValueFactory<>("Total"));
 
         try {
-            //tvLaporanPenjualan.getItems().clear();
             linkedList.clear();
             Statement st = con.createStatement();
             String sql = "SELECT User.Username, User.UserID, Transaksi.TanggalTransaksi, Transaksi.MetodeTransaksi, Transaksi.Total FROM User, Transaksi WHERE User.UserID = Transaksi.UserID ";
@@ -351,15 +309,11 @@ public class LaporanPendapatan {
             }
             tvLaporanPenjualan.getItems().clear();
             tvLaporanPenjualan.getItems().addAll(linkedList);
-                
-
         } catch (Exception e) {
             e.getStackTrace();
             e.getCause();
         }
     }
-
-    
 
     @FXML
     void back(MouseEvent event) throws IOException {
@@ -376,5 +330,4 @@ public class LaporanPendapatan {
         stage.setTitle("Kofilo");
         stage.setScene(new Scene(root));
     }
-
 }

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.order;
 
-public class AfterUserProduct implements Initializable{
+public class AfterUserProduct implements Initializable {
 
     @FXML
     private Button btnBack;
@@ -63,7 +62,6 @@ public class AfterUserProduct implements Initializable{
     LinkedList<order> ll = new LinkedList<>();
     ObservableList<Integer> list = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10);
 
-
     @FXML
     void Back(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnChekout.getScene().getWindow();
@@ -78,18 +76,17 @@ public class AfterUserProduct implements Initializable{
             Statement st = con.createStatement();
             String sql = "SELECT DetailOrderID FROM DetailOrder WHERE TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)";
             ResultSet rs = st.executeQuery(sql);
-            if(rs.next()){
+            if (rs.next()) {
                 Stage stage = (Stage) btnChekout.getScene().getWindow();
                 Parent root = FXMLLoader.load(getClass().getResource("userCheckout.fxml"));
                 stage.setTitle("Kofilo");
                 stage.setScene(new Scene(root));
-            }else
+            } else
                 checkoutMsg();
         } catch (Exception e) {
             e.printStackTrace();
             e.getCause();
         }
-
     }
 
     @FXML
@@ -98,11 +95,11 @@ public class AfterUserProduct implements Initializable{
             PreparedStatement pst = con.prepareStatement("UPDATE NamaBahan, Bahan, DetailOrder, Minuman SET NamaBahan.Quantity = NamaBahan.Quantity + (Bahan.Quantity * DetailOrder.Quantity) WHERE DetailOrder.MinumanID = Bahan.MinumanID AND bahan.NamaBahanID = NamaBahan.NamaBahanID AND DetailOrder.TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1) AND Minuman.NamaMinuman = ?");
             pst.setString(1, labelNamaItem.getText());
             int status = pst.executeUpdate();
-            if(status !=-1){
+            if (status !=-1) {
                 pst = con.prepareStatement("DELETE FROM DetailOrder WHERE MinumanID = (SELECT MinumanID FROM Minuman WHERE NamaMinuman = ?) AND TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)");
                 pst.setString(1, labelNamaItem.getText());
                 int stats = pst.executeUpdate();
-                if(stats !=-1){
+                if (stats !=-1) {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Berhasil");
                     alert.setHeaderText("Anda Berhasil Menghapus Item Anda!");
@@ -123,14 +120,14 @@ public class AfterUserProduct implements Initializable{
                         labelNamaItem.setText(null);
                         cbQuantity.getItems().clear();
                     } catch (Exception e) {
-                        //TODO: handle exception
                         e.printStackTrace();
                         e.getCause();
                     }
                 }
             }
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
+            e.getCause();
         }
     }
 
@@ -140,15 +137,15 @@ public class AfterUserProduct implements Initializable{
             PreparedStatement pst = con.prepareStatement("UPDATE NamaBahan, Bahan, DetailOrder, Minuman SET NamaBahan.Quantity = NamaBahan.Quantity + (Bahan.Quantity * DetailOrder.Quantity) WHERE DetailOrder.MinumanID = Bahan.MinumanID AND bahan.NamaBahanID = NamaBahan.NamaBahanID AND DetailOrder.TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1) AND Minuman.NamaMinuman = ?");
             pst.setString(1, labelNamaItem.getText());
             int stats = pst.executeUpdate();
-            if(stats != -1){
+            if (stats != -1) {
                 pst = con.prepareStatement("UPDATE DetailOrder SET DetailOrder.Quantity = ? WHERE MinumanID = (SELECT MinumanID FROM Minuman WHERE NamaMinuman = ?)");
                 pst.setInt(1, cbQuantity.getSelectionModel().getSelectedItem());
                 pst.setString(2, labelNamaItem.getText());
                 int status = pst.executeUpdate();
-                if(status !=-1){
+                if (status !=-1) {
                     pst = con.prepareStatement("UPDATE DetailOrder, Minuman SET DetailOrder.Total = DetailOrder.Quantity * Minuman.Harga WHERE DetailOrder.MinumanID = Minuman.MinumanID");
                     int statusUpdate = pst.executeUpdate();
-                    if(statusUpdate!=-1){
+                    if (statusUpdate!=-1) {
                         pst = con.prepareStatement("UPDATE NamaBahan, Bahan, DetailOrder, Minuman SET NamaBahan.Quantity = NamaBahan.Quantity - (Bahan.Quantity * DetailOrder.Quantity) WHERE DetailOrder.MinumanID = Bahan.MinumanID AND bahan.NamaBahanID = NamaBahan.NamaBahanID AND DetailOrder.TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1) AND Minuman.NamaMinuman = ?");
                         pst.setString(1, labelNamaItem.getText());
                         pst.executeUpdate();
@@ -172,7 +169,6 @@ public class AfterUserProduct implements Initializable{
                             labelNamaItem.setText(null);
                             cbQuantity.getItems().clear();
                         } catch (Exception e) {
-                            //TODO: handle exception
                             e.printStackTrace();
                             e.getCause();
                         }
@@ -180,17 +176,15 @@ public class AfterUserProduct implements Initializable{
                 }
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
-        
     }
     
     @FXML
     void getSelected(MouseEvent event) {
         int index = tvPesananSaya.getSelectionModel().getSelectedIndex();
-        if(index <=-1){
+        if (index <=-1) {
             return;
         }
         labelNamaItem.setText(tcItem.getCellData(index).toString());
@@ -200,7 +194,6 @@ public class AfterUserProduct implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
         cbQuantity.setItems(list);
         
         tcItem.setCellValueFactory(new PropertyValueFactory<>("NamaMinuman"));
@@ -217,12 +210,12 @@ public class AfterUserProduct implements Initializable{
             tvPesananSaya.getItems().clear();
             tvPesananSaya.getItems().addAll(ll);
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
     }
-    public void checkoutMsg(){
+
+    public void checkoutMsg() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Error");
         alert.setHeaderText("Gagal");

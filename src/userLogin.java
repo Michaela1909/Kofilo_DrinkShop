@@ -37,6 +37,8 @@ public class userLogin {
     @FXML
     private TextField username;
 
+    PreparedStatement pst; 
+
     @FXML
     void back(MouseEvent event) throws IOException {
         Stage stage = (Stage) back.getScene().getWindow();
@@ -45,8 +47,6 @@ public class userLogin {
         stage.setScene(new Scene(root));
     }
     
-    PreparedStatement pst; 
-
     @FXML
     void login(ActionEvent event) throws IOException {
         try {
@@ -83,8 +83,9 @@ public class userLogin {
                         alert.setHeaderText("Anda belum terdaftar sebagai user");
                         alert.setContentText("Silahkan coba lagi atau daftar user!");
                         alert.showAndWait();
+                        username.setText(null);
+                        password.setText(null);
                     }
-                
                 } else {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Error");
@@ -98,5 +99,4 @@ public class userLogin {
             e.getCause();
         }
     }
-
 }

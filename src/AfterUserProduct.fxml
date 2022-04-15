@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #f3f2ef;" styleClass="label" stylesheets="@model/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AfterUserProduct">
    <children>
       <Button fx:id="btnBack" layoutX="145.0" layoutY="88.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-color: rgba (0,0,0,0);" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0">
@@ -59,7 +58,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cbQuantity" layoutX="57.0" layoutY="382.0" prefHeight="45.0" prefWidth="350.0" style="-fx-background-radius: 20;" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="382.0" />
+      <ComboBox fx:id="cbQuantity" layoutX="57.0" layoutY="382.0" prefHeight="45.0" prefWidth="350.0" style="-fx-background-radius: 20; -fx-background-color: #a98853;" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="382.0" />
       <Button fx:id="btnEdit" layoutX="76.0" layoutY="503.0" mnemonicParsing="false" onAction="#edit" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #2fa4ff#2fa4ff; -fx-background-radius: 30;" text="EDIT" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="496.0">
          <font>
             <Font name="Arial Bold" size="18.0" />
@@ -67,7 +66,7 @@
       </Button>
       <Button fx:id="btnDelete" layoutX="86.0" layoutY="513.0" mnemonicParsing="false" onAction="#delete" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #e10000; -fx-background-radius: 30;" text="DELETE" textFill="WHITE" AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="496.0">
          <font>
-            <Font name="Arial" size="18.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Button>
    </children>

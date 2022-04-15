@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.sql.*;
 import java.util.LinkedList;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

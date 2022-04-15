@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +22,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class PembelianAdmin implements Initializable{
+public class PembelianAdmin implements Initializable {
+
     public int NamaBahanID;
 
     @FXML
@@ -38,7 +38,6 @@ public class PembelianAdmin implements Initializable{
     @FXML
     private Button btnLogOut;
 
-
     @FXML
     private TextField tfQuantity;
 
@@ -52,67 +51,69 @@ public class PembelianAdmin implements Initializable{
     @FXML
     void NamaProduk(ActionEvent event) {
         String s = NamaProduk.getSelectionModel().getSelectedItem().toString();
-        if(s=="Kopi Bubuk"){
+        if (s=="Kopi Bubuk") {
             Harga = 50;
             NamaBahanID=1;
         }
-        if(s=="Susu Full Cream"){
+        if (s=="Susu Full Cream") {
             Harga = 30;
             NamaBahanID=2;
         }
-        if(s=="Cokelat Bubuk"){
+        if (s=="Cokelat Bubuk") {
             Harga = 50;
             NamaBahanID=3;
         }
-        if(s=="Sirup Vanilla"){
+        if (s=="Sirup Vanilla") {
             Harga = 45;
             NamaBahanID=4;
         }
-        if(s=="Saus Karamel"){
+        if (s=="Saus Karamel") {
             Harga = 45;
             NamaBahanID=5;
         }
-        if(s=="Saus Cokelat"){
+        if (s=="Saus Cokelat") {
             Harga = 45;
             NamaBahanID=6;
         }
-        if(s=="Whipped Cream"){
+        if (s=="Whipped Cream") {
             Harga = 30; 
             NamaBahanID=7;
         }
-        if(s=="Susu Kental Manis"){
+        if (s=="Susu Kental Manis") {
             Harga = 20; 
             NamaBahanID=8;
         }
-        if(s=="Garam"){
+        if (s=="Garam") {
             Harga = 5; 
             NamaBahanID=9;
         }
-        if(s=="Chocolate Chips"){
+        if (s=="Chocolate Chips") {
             Harga = 30;
             NamaBahanID=10;
         }
-        if(s=="Gula Merah"){
+        if (s=="Gula Merah") {
             Harga = 10; 
             NamaBahanID=11;
         }
-        if(s=="Gula Putih"){
+        if (s=="Gula Putih") {
             Harga = 10; 
             NamaBahanID=12;
         }
-        if(s=="Susu Fresh Milk"){
-           Harga = 30; 
+        if (s=="Susu Fresh Milk") {
+            Harga = 30; 
             NamaBahanID=13;
         }
-        if(s=="Bubuk Matcha"){
+        if (s=="Bubuk Matcha") {
             Harga = 30; 
             NamaBahanID=14;
         }
-        if(s=="Creamer Bubuk"){
+        if (s=="Creamer Bubuk") {
             Harga = 20;
             NamaBahanID=15;
         }
-
+        int quantity = Integer.parseInt(tfQuantity.getText());
+        int total = quantity * Harga;
+        tfTotalPembelian.setText(Integer.toString(total));
     }
 
     @FXML
@@ -125,45 +126,49 @@ public class PembelianAdmin implements Initializable{
 
     @FXML
     void btnKirimPembelian(ActionEvent event) {
-        
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
             LocalDateTime now = LocalDateTime.now();  
-            
-            pst = con.prepareStatement("insert into Pembelian(NamaBahanID, Quantity, TotalHargaBeli, TanggalTransaksi) VALUES (?, ?, ?, ?)");
-            pst.setInt(1, NamaBahanID);
-            pst.setInt(2, Integer.parseInt(tfQuantity.getText()));
-            pst.setInt(3, Integer.parseInt(tfTotalPembelian.getText()));
-            pst.setString(4, dtf.format(now));
-            int status = pst.executeUpdate();
-
-            if(status == -1){
+            if (NamaProduk.getValue()==null || tfQuantity.getText().isEmpty()) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Error");
-                alert.setHeaderText("Terjadi kesalahan");
-                alert.setContentText("Silahkan coba lagi!");
+                alert.setHeaderText("Textfield Kosong");
+                alert.setContentText("Input Textfield!");
                 alert.showAndWait();
-                
-            }else{
-                pst = con.prepareStatement("UPDATE NamaBahan,Pembelian SET NamaBahan.Quantity = NamaBahan.Quantity + (SELECT Quantity FROM Pembelian ORDER BY PembelianID DESC LIMIT 1) WHERE Pembelian.NamaBahanID = NamaBahan.NamaBahanID AND Pembelian.NamaBahanID = " + NamaBahanID+"");
-                int statusUpdate = pst.executeUpdate();
-                if(statusUpdate!=-1){
-                    Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Berhasil");
-                    alert.setHeaderText("Anda Berhasil membeli " + NamaProduk.getSelectionModel().getSelectedItem());
-                    alert.showAndWait();
+            } else {
+                pst = con.prepareStatement("INSERT INTO Pembelian(NamaBahanID, Quantity, TotalHargaBeli, TanggalTransaksi) VALUES (?, ?, ?, ?)");
+                pst.setInt(1, NamaBahanID);
+                pst.setInt(2, Integer.parseInt(tfQuantity.getText()));
+                pst.setInt(3, Integer.parseInt(tfTotalPembelian.getText()));
+                pst.setString(4, dtf.format(now));
+                int status = pst.executeUpdate();
 
-                    tfQuantity.setText(null);
-                    tfTotalPembelian.setText(null);
-                    NamaProduk.getSelectionModel().clearSelection();;
-                }else{
+                if (status == -1) {
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Error");
                     alert.setHeaderText("Terjadi kesalahan");
                     alert.setContentText("Silahkan coba lagi!");
                     alert.showAndWait();
-                }
+                } else {
+                    pst = con.prepareStatement("UPDATE NamaBahan,Pembelian SET NamaBahan.Quantity = NamaBahan.Quantity + (SELECT Quantity FROM Pembelian ORDER BY PembelianID DESC LIMIT 1) WHERE Pembelian.NamaBahanID = NamaBahan.NamaBahanID AND Pembelian.NamaBahanID = " + NamaBahanID + "");
+                    int statusUpdate = pst.executeUpdate();
+                    if (statusUpdate!=-1) {
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Berhasil");
+                        alert.setHeaderText("Anda Berhasil membeli " + NamaProduk.getSelectionModel().getSelectedItem());
+                        alert.showAndWait();
 
+                        tfQuantity.setText(null);
+                        tfTotalPembelian.setText(null);
+                        NamaProduk.getSelectionModel().clearSelection();;
+                    } else {
+                        Alert alert = new Alert(AlertType.INFORMATION);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Terjadi kesalahan");
+                        alert.setContentText("Silahkan coba lagi!");
+                        alert.showAndWait();
+                    }
+                }
             }
         } catch (Exception e) {
             e.getCause();
@@ -191,5 +196,4 @@ public class PembelianAdmin implements Initializable{
         ObservableList<String> list = FXCollections.observableArrayList("Kopi Bubuk", "Susu Full Cream", "Cokelat Bubuk", "Sirup Vanilla", "Saus Karamel", "Saus Cokelat", "Whipped Cream", "Susu Kental Manis", "Garam", "Chocolate Chips", "Gula Merah", "Gula Putih", "Susu Fresh Milk", "Bubuk Matcha", "Creamer Bubuk");
         NamaProduk.setItems(list);
     }
-
 }

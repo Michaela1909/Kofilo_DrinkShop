@@ -3,7 +3,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +18,7 @@ import javafx.stage.Stage;
 import model.laporan;
 
 public class LaporanPembelian {
+
     @FXML
     private ImageView back;
 
@@ -82,7 +82,4 @@ public class LaporanPembelian {
         stage.setTitle("Kofilo");
         stage.setScene(new Scene(root));
     }
-
-    
-
 }

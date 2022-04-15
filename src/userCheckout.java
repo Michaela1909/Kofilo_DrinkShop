@@ -6,11 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
-
-
 import java.sql.Statement;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,29 +56,26 @@ public class userCheckout implements Initializable {
     Connection con = connection.kofiloConnection();
     LinkedList<order> ll = new LinkedList<>();
 
-
     @FXML
     void bayarBtn(ActionEvent event) throws IOException {
-        
         try {
             Statement st = con.createStatement();
             String sql = "SELECT DetailOrder.DetailOrderID FROM DetailOrder WHERE TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)";
             ResultSet rs = st.executeQuery(sql);
-            if(rs.next()){
-                if(metodePembayaranCb.getSelectionModel().getSelectedItem() == null){
+            if (rs.next()) {
+                if (metodePembayaranCb.getSelectionModel().getSelectedItem() == null) {
                     MetodePembayaranMsg();
-                }else{
+                } else {
                     updateMetodePembayaran();
                     Stage stage = (Stage) bayar.getScene().getWindow();
                     Parent root = FXMLLoader.load(getClass().getResource("userInvoice.fxml"));
                     stage.setTitle("Kofilo");
                     stage.setScene(new Scene(root));
                 }
-            }else{
+            } else {
                 errorMsg();
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
@@ -95,7 +88,6 @@ public class userCheckout implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
         metodePembayaranCb.getItems().add("Cash");
         metodePembayaranCb.getItems().add("Transfer Bank");
         metodePembayaranCb.getItems().add("OVO");
@@ -119,72 +111,67 @@ public class userCheckout implements Initializable {
             order.getItems().addAll(ll);
             updateTotal();
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
     }
 
-    public void updateTotal(){ 
+    public void updateTotal() { 
         try {
             Statement st = con.createStatement();
             String sql = "SELECT SUM(DetailOrder.Total) FROM DetailOrder WHERE TransaksiID = (SELECT TransaksiID FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1)";
             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 labelTotal.setText("Rp " + rs.getString(1));
                 try {
                     Statement st1 = con.createStatement();
                     String sql1 = "SELECT User.UserStatus FROM User, Transaksi WHERE Transaksi.UserID = User.UserID ORDER BY TransaksiID DESC LIMIT 1";
                     ResultSet rs1 = st1.executeQuery(sql1);
-                    while(rs1.next()){
-                        if(rs1.getString(1).equals("M")){
+                    while (rs1.next()) {
+                        if (rs1.getString(1).equals("M")) {
                             labelDiskon.setText("Rp 10000");
                             PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(Total)-10000 FROM DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1;");
                             int stats = pst.executeUpdate();
-                            if(stats!=-1){
+                            if (stats!=-1) {
                                 Statement st2 = con.createStatement();
                                 String sql2 = "SELECT Total FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1";
                                 ResultSet rs2 = st2.executeQuery(sql2);
-                                while(rs2.next()){
+                                while (rs2.next()) {
                                     labelTotalBelanja.setText("Rp " + rs2.getInt(1));
                                 }
                             }
-
-                        }else{
+                        } else {
                             labelDiskon.setText("Rp 0");
                             PreparedStatement pst = con.prepareStatement("UPDATE Transaksi SET Total = (SELECT SUM(Total) FROM DetailOrder WHERE DetailOrder.TransaksiID = Transaksi.TransaksiID) WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1;");
                             int stats = pst.executeUpdate();
-                            if(stats!=-1){
+                            if (stats!=-1) {
                                 Statement st2 = con.createStatement();
                                 String sql2 = "SELECT Total FROM Transaksi ORDER BY TransaksiID DESC LIMIT 1";
                                 ResultSet rs2 = st2.executeQuery(sql2);
-                                while(rs2.next()){
+                                while (rs2.next()) {
                                     labelTotalBelanja.setText("Rp " + rs2.getInt(1));
                                 }
                             }
                         }
-                        
                     }
-                            
                 } catch (Exception e) {
-                    //TODO: handle exception
                     e.printStackTrace();
                     e.getCause();
                 }
             }
         } catch (Exception e) {
-            //TODO: handle exception
             e.printStackTrace();
             e.getCause();
         }
     }
-    public void updateMetodePembayaran(){
+
+    public void updateMetodePembayaran() {
         PreparedStatement pst;
         try {
             pst = con.prepareStatement("UPDATE Transaksi SET MetodeTransaksi = ? WHERE TransaksiID ORDER BY TransaksiID DESC LIMIT 1");
             pst.setString(1, metodePembayaranCb.getSelectionModel().getSelectedItem());
             int stats = pst.executeUpdate();
-            if(stats!=-1){
+            if (stats!=-1) {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Berhasil");
                 alert.setHeaderText("Anda Berhasil Melakukan Pembayaran Pesanan Anda!");
@@ -192,24 +179,24 @@ public class userCheckout implements Initializable {
                 alert.showAndWait();
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             e.getCause();
         }
     }
-    public void errorMsg(){
+
+    public void errorMsg() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Error");
         alert.setHeaderText("Silahkan coba lagi!");
         alert.setContentText("Silahkan pilih item yang anda ingin beli terlebih dahulu!");
         alert.showAndWait();
     }
-    public void MetodePembayaranMsg(){
+
+    public void MetodePembayaranMsg() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Error");
         alert.setHeaderText("Silahkan coba lagi!");
         alert.setContentText("Silahkan pilih metode pembayaran yang ingin digunakan terlebih dahulu!");
         alert.showAndWait();
     }
-
 }
