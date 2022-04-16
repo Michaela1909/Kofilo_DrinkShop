@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,7 +9,7 @@ public class App extends Application {
 
     public void start(Stage stage) throws IOException {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/firstPage.fxml"));
+            loader.setLocation(getClass().getResource("/userCheckout.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);

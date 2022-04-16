@@ -48,7 +48,7 @@
                   <Font name="Arial Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="labelTotalBelanja" layoutX="289.0" layoutY="268.0" text="47000" textFill="#a98853">
+            <Label fx:id="labelTotalBelanja" layoutX="289.0" layoutY="268.0" text="Rp 47000" textFill="#a98853">
                <font>
                   <Font name="Arial Bold" size="24.0" />
                </font>
@@ -61,7 +61,7 @@
               </columns>
             </TableView>
             <ComboBox fx:id="metodePembayaranCb" layoutX="83.0" layoutY="346.0" prefHeight="50.0" prefWidth="223.0" promptText="Pilih Metode Pembayaran " style="-fx-background-color: #a98853; -fx-color: black; -fx-background-radius: 25;" />
-            <Line endX="195.0" layoutX="188.0" layoutY="246.0" startX="-133.0" />
+            <Line endX="239.0" layoutX="188.0" layoutY="246.0" startX="-133.0" />
          </children>
       </AnchorPane>
    </children>
